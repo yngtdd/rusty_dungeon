@@ -1,7 +1,9 @@
-mod camera;
+#[warn(clippy::pedantic)]
+
 mod map;
 mod map_builder;
 mod player;
+mod camera;
 
 mod prelude {
     pub use bracket_lib::prelude::*;
@@ -10,8 +12,8 @@ mod prelude {
     pub const DISPLAY_WIDTH: i32 = SCREEN_WIDTH / 2;
     pub const DISPLAY_HEIGHT: i32 = SCREEN_HEIGHT / 2;
     pub use crate::map::*;
-    pub use crate::map_builder::*;
     pub use crate::player::*;
+    pub use crate::map_builder::*;
     pub use crate::camera::*;
 }
 
@@ -49,7 +51,7 @@ impl GameState for State {
 }
 
 fn main() -> BError {
-    let context = BTermBuilder::simple80x50()
+    let context = BTermBuilder::new()
         .with_title("Rusty Dungeon")
         .with_fps_cap(30.0)
         .with_dimensions(DISPLAY_WIDTH, DISPLAY_HEIGHT)
