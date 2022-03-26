@@ -1,9 +1,11 @@
 mod camera;
 mod components;
-#[warn(clippy::pedantic)]
 mod map;
 mod map_builder;
 mod spawner;
+mod systems;
+
+#[warn(clippy::pedantic)]
 
 mod prelude {
     pub use bracket_lib::prelude::*;
@@ -19,6 +21,7 @@ mod prelude {
     pub use crate::map::*;
     pub use crate::map_builder::*;
     pub use crate::spawner::*;
+    pub use crate::systems::*;
 }
 
 use prelude::*;
@@ -35,6 +38,7 @@ impl State {
         let mut resources = Resources::default();
         let mut rng = RandomNumberGenerator::new();
         let map_builder = MapBuilder::new(&mut rng);
+        spawn_player(&mut ecs, map_builder.player_start);
 
         resources.insert(map_builder.map);
         resources.insert(Camera::new(map_builder.player_start));
