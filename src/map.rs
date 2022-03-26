@@ -19,31 +19,31 @@ impl Map {
         }
     }
 
-    /// Render the map to the screen 
+    /// Render the map to the screen
     ///
     pub fn render(&self, ctx: &mut BTerm, camera: &Camera) {
         ctx.set_active_console(0);
-        for y in camera.top_y .. camera.bottom_y {
-            for x in camera.left_x .. camera.right_x {
+        for y in camera.top_y..camera.bottom_y {
+            for x in camera.left_x..camera.right_x {
                 if self.in_bounds(Point::new(x, y)) {
                     let idx = map_idx(x, y);
                     match self.tiles[idx] {
                         TileType::Floor => {
                             ctx.set(
-                                x - camera.left_x, 
-                                y - camera.top_y, 
-                                WHITE, 
-                                BLACK, 
-                                to_cp437('.')
+                                x - camera.left_x,
+                                y - camera.top_y,
+                                WHITE,
+                                BLACK,
+                                to_cp437('.'),
                             );
                         }
                         TileType::Wall => {
                             ctx.set(
-                                x - camera.left_x, 
-                                y - camera.top_y, 
-                                WHITE, 
-                                BLACK, 
-                                to_cp437('#')
+                                x - camera.left_x,
+                                y - camera.top_y,
+                                WHITE,
+                                BLACK,
+                                to_cp437('#'),
                             );
                         }
                     }
@@ -63,7 +63,7 @@ impl Map {
 
     /// Check if an entity can enter a tile
     ///
-    /// An entity can enter a tile if it is within the map's bounds and the tile 
+    /// An entity can enter a tile if it is within the map's bounds and the tile
     /// type is floor
     pub fn can_enter_tile(&self, point: Point) -> bool {
         self.in_bounds(point) && self.tiles[map_idx(point.x, point.y)] == TileType::Floor
@@ -71,8 +71,8 @@ impl Map {
 
     /// Try to get the index of a particular tile on the map
     ///
-    /// Given a particular `Point`, try to get the tile index. If the 
-    /// point is not within the map's bounds, return None, otherwise 
+    /// Given a particular `Point`, try to get the tile index. If the
+    /// point is not within the map's bounds, return None, otherwise
     /// get the `map_index(point.x, point.y)`.
     pub fn try_idx(&self, point: Point) -> Option<usize> {
         if !self.in_bounds(point) {
