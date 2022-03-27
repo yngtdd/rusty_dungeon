@@ -7,7 +7,7 @@ pub fn player_input(
     ecs: &mut SubWorld,
     #[resource] map: &Map,
     #[resource] key: &Option<VirtualKeyCode>,
-    #[resource] camera: &mut Camera
+    #[resource] camera: &mut Camera,
 ) {
     if let Some(key) = key {
         let delta = match key {
@@ -19,8 +19,7 @@ pub fn player_input(
         };
 
         if delta.x != 0 || delta.y != 0 {
-            let mut players = <&mut Point>::query()
-                .filter(component::<Player>());
+            let mut players = <&mut Point>::query().filter(component::<Player>());
 
             players.iter_mut(ecs).for_each(|pos| {
                 let destination = *pos + delta;
