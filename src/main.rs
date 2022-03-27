@@ -40,7 +40,8 @@ impl State {
         let map_builder = MapBuilder::new(&mut rng);
         spawn_player(&mut ecs, map_builder.player_start);
 
-        map_builder.rooms
+        map_builder
+            .rooms
             .iter()
             .skip(1)
             .map(|r| r.center())
