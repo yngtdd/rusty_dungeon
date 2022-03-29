@@ -4,6 +4,7 @@ mod map;
 mod map_builder;
 mod spawner;
 mod systems;
+mod turn_state;
 
 #[warn(clippy::pedantic)]
 
@@ -22,6 +23,7 @@ mod prelude {
     pub use crate::map_builder::*;
     pub use crate::spawner::*;
     pub use crate::systems::*;
+    pub use crate::turn_state::*;
 }
 
 use prelude::*;
@@ -29,7 +31,9 @@ use prelude::*;
 struct State {
     ecs: World,
     resources: Resources,
-    systems: Schedule,
+    input_systems: Schedule,
+    player_systems: Schedule,
+    monster_systems: Schedule,
 }
 
 impl State {
@@ -49,11 +53,14 @@ impl State {
 
         resources.insert(map_builder.map);
         resources.insert(Camera::new(map_builder.player_start));
+        resources.insert(TurnState::AwaitingInput);
 
         Self {
             ecs,
             resources,
-            systems: build_scheduler(),
+            input_systems: build_input_scheduler(),
+            player_systems: build_player_schedule(),
+            monster_systems: build_monster_scheduler()
         }
     }
 }
@@ -65,8 +72,29 @@ impl GameState for State {
         ctx.set_active_console(1);
         ctx.cls();
         self.resources.insert(ctx.key);
-        self.systems.execute(&mut self.ecs, &mut self.resources);
-        // TODO(Todd: Render Draw Buffer
+
+        let current_state = self.resources.get::<TurnState>().unwrap().clone();
+        match current_state {
+            TurnState::AwaitingInput => {
+                self.input_systems.execute(
+                    &mut self.ecs,
+                    &mut self.resources
+                )
+            }
+            TurnState::PlayerTurn => {
+                self.player_systems.execute(
+                    &mut self.ecs, 
+                    &mut self.resources
+                )
+            }
+            TurnState::MonsterTurn => {
+                self.monster_systems.execute(
+                    &mut self.ecs, 
+                    &mut self.resources
+                )
+            }
+        }
+
         render_draw_buffer(ctx).expect("Render error");
     }
 }
