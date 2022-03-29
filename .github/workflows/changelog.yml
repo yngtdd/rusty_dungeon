@@ -17,14 +17,14 @@ jobs:
         id: changelog
         uses: loopwerk/tag-changelog@v1
         with:
-          token: ${{ secrets.RELEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           exclude_types: other,docs,chore
           config_file: .github/tag-changelog-config.js
 
       - name: Create release
         uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
