@@ -18,7 +18,8 @@ jobs:
         uses: loopwerk/tag-changelog@v1
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
-          exclude_types: other,doc,chore
+          exclude_types: other,docs,chore
+          config_file: .github/tag-changelog-config.js
 
       - name: Create release
         uses: actions/create-release@latest
