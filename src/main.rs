@@ -67,13 +67,20 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
+        self.resources.insert(ctx.key);
+
         ctx.set_active_console(0);
+        // Virtual consoles have different resolutions, and the mouse position 
+        // is provided in terminal coordinates. Make sure that `set_active_console`
+        // is called before requesting the `mouse_pos` to ensure that you receive 
+        // the coordinates for the correct terminal layer.
+        self.resources.insert(Point::from_tuple(ctx.mouse_pos()));
+
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
         ctx.set_active_console(2);
         ctx.cls();
-        self.resources.insert(ctx.key);
 
         let current_state = self.resources.get::<TurnState>().unwrap().clone();
         match current_state {
