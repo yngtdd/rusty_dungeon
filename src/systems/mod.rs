@@ -1,11 +1,11 @@
 mod collisions;
 mod end_turn;
 mod entity_render;
+mod hud;
 mod map_render;
 mod movement;
 mod player_input;
 mod random_move;
-mod hud;
 
 use crate::prelude::*;
 
