@@ -70,9 +70,9 @@ impl GameState for State {
         self.resources.insert(ctx.key);
 
         ctx.set_active_console(0);
-        // Virtual consoles have different resolutions, and the mouse position 
+        // Virtual consoles have different resolutions, and the mouse position
         // is provided in terminal coordinates. Make sure that `set_active_console`
-        // is called before requesting the `mouse_pos` to ensure that you receive 
+        // is called before requesting the `mouse_pos` to ensure that you receive
         // the coordinates for the correct terminal layer.
         self.resources.insert(Point::from_tuple(ctx.mouse_pos()));
 
