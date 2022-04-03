@@ -6,6 +6,7 @@ mod movement;
 mod player_input;
 mod random_move;
 mod tooltips;
+mod combat;
 
 use crate::prelude::*;
 
