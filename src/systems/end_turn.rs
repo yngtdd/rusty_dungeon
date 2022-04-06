@@ -11,7 +11,7 @@ pub fn end_turn(ecs: &SubWorld, #[resource] turn_state: &mut TurnState) {
         TurnState::AwaitingInput => return,
         TurnState::PlayerTurn => TurnState::MonsterTurn,
         TurnState::MonsterTurn => TurnState::AwaitingInput,
-        _ => current_state
+        _ => current_state,
     };
 
     player_hp.iter(ecs).for_each(|hp| {

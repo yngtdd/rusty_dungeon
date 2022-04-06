@@ -13,7 +13,7 @@ pub fn combat(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
         .collect();
 
     victims.iter().for_each(|(message, victim)| {
-        let is_player = ecs 
+        let is_player = ecs
             .entry_ref(*victim)
             .unwrap()
             .get_component::<Player>()
