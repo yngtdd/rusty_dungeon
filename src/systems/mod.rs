@@ -2,13 +2,13 @@ mod chasing;
 mod combat;
 mod end_turn;
 mod entity_render;
+mod field_of_view;
 mod hud;
 mod map_render;
 mod movement;
 mod player_input;
 mod random_move;
 mod tooltips;
-mod field_of_view;
 
 use crate::prelude::*;
 

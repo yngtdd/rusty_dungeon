@@ -111,7 +111,7 @@ impl BaseMap for Map {
 
     /// Check if a map tile blocks vision
     ///
-    /// This is similar to `is_blocked`, but for intuition we 
+    /// This is similar to `is_blocked`, but for intuition we
     /// allow duplication of these functions. A closed window
     /// is not opaque, but it does block entry.
     fn is_opaque(&self, idx: usize) -> bool {

@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 pub use crate::prelude::*;
+use std::collections::HashSet;
 
 /// Rendering 2D glyphs
 #[derive(Clone, Copy, Debug, PartialEq)]

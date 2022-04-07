@@ -14,4 +14,3 @@ pub fn fov(ecs: &mut SubWorld, #[resource] map: &Map) {
             fov.is_dirty = false;
         });
 }
-
