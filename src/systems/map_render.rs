@@ -15,14 +15,37 @@ pub fn map_render(ecs: &SubWorld, #[resource] map: &Map, #[resource] camera: &Ca
             let pt = Point::new(x, y);
             let offset = Point::new(camera.left_x, camera.top_y);
 
-            if map.in_bounds(pt) && player_fov.visible_tiles.contains(&pt) {
-                let idx = map_idx(x, y);
-                let glyph = match map.tiles[idx] {
-                    TileType::Floor => to_cp437('.'),
-                    TileType::Wall => to_cp437('#'),
+            let idx = map_idx(x, y);
+            if map.in_bounds(pt) && player_fov.visible_tiles.contains(&pt) | map.revealed_tiles[idx] {
+
+                let tint = if player_fov.visible_tiles.contains(&pt) {
+                    WHITE
+                } else {
+                    DARK_GREY
                 };
 
-                draw_batch.set(pt - offset, ColorPair::new(WHITE, BLACK), glyph);
+                match map.tiles[idx] {
+                    TileType::Floor => {
+                        draw_batch.set(
+                            pt - offset ,
+                            ColorPair::new(
+                                tint,
+                                BLACK
+                            ),
+                            to_cp437('.'),
+                        )
+                    }
+                    TileType::Wall => {
+                        draw_batch.set(
+                            pt - offset,
+                            ColorPair::new(
+                                tint,
+                                BLACK
+                            ),
+                            to_cp437('#'),
+                        )
+                    }
+                };
             }
         }
     }
