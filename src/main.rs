@@ -100,13 +100,13 @@ impl State {
             4,
             WHITE,
             BLACK,
-            "You put on the Amulet of Yala and feel its power course through your veins"
+            "You put on the Amulet of Yala and feel its power course through your veins",
         );
         ctx.print_color_centered(
             5,
             WHITE,
             BLACK,
-            "Your town is saved, and you can return to your normal life."
+            "Your town is saved, and you can return to your normal life.",
         );
         ctx.print_color_centered(9, GREEN, BLACK, "Press 1 to play again");
 

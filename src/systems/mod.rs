@@ -2,6 +2,7 @@ mod chasing;
 mod combat;
 mod end_turn;
 mod entity_render;
+mod field_of_view;
 mod hud;
 mod map_render;
 mod movement;
@@ -14,6 +15,7 @@ use crate::prelude::*;
 pub fn build_input_scheduler() -> Schedule {
     Schedule::builder()
         .add_system(player_input::player_input_system())
+        .add_system(field_of_view::fov_system())
         .flush()
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())
@@ -28,6 +30,7 @@ pub fn build_player_schedule() -> Schedule {
         .flush()
         .add_system(movement::movement_system())
         .flush()
+        .add_system(field_of_view::fov_system())
         .flush()
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())
@@ -45,6 +48,7 @@ pub fn build_monster_scheduler() -> Schedule {
         .flush()
         .add_system(movement::movement_system())
         .flush()
+        .add_system(field_of_view::fov_system())
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())
         .add_system(hud::hud_system())
