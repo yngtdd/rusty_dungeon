@@ -56,29 +56,6 @@ pub fn apply_prefab(mb: &mut MapBuilder, rng: &mut RandomNumberGenerator) {
         attempts += 1;
     }
 
-    // if let Some(placement) = placement {// (9)
-    //     let string_vec : Vec<char> = FORTRESS.0
-    //         .chars().filter(|a| *a != '\r' && *a !='\n')
-    //         .collect();// (10)
-    //     let mut i = 0;// (11)
-    //     for ty in placement.y .. placement.y + FORTRESS.2 {// (12)
-    //         for tx in placement.x .. placement.x + FORTRESS.1 {
-    //             let idx = map_idx(tx, ty);
-    //             let c = string_vec[i];// (13)
-    //             match c {// (14)
-    //                 'M' => {// (15)
-    //                     mb.map.tiles[idx] = TileType::Floor;
-    //                     mb.monster_spawns.push(Point::new(tx, ty));
-    //                 }
-    //                 '-' => mb.map.tiles[idx] = TileType::Floor,// (16)
-    //                 '#' => mb.map.tiles[idx] = TileType::Wall,
-    //                 _ => println!("No idea what to do with [{}]", c)// (17)
-    //             }
-    //             i += 1;
-    //         }
-    //     }
-    // }
-
     if let Some(placement) = placement {
         let string_vec: Vec<char> = FORTRESS
             .0
