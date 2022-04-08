@@ -1,5 +1,5 @@
-use crate::prelude::*;
 use super::MapArchitect;
+use crate::prelude::*;
 
 pub struct EmptyArchitect {}
 
@@ -18,12 +18,10 @@ impl MapArchitect for EmptyArchitect {
         mb.amulet_start = mb.find_most_distant();
 
         for _ in 0..50 {
-            mb.monster_spawns.push(
-                Point::new(
-                    rng.range(1, SCREEN_WIDTH),
-                    rng.range(1, SCREEN_HEIGHT)
-                )
-            )
+            mb.monster_spawns.push(Point::new(
+                rng.range(1, SCREEN_WIDTH),
+                rng.range(1, SCREEN_HEIGHT),
+            ))
         }
         mb
     }
