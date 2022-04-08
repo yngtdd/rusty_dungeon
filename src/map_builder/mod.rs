@@ -1,6 +1,7 @@
 use crate::prelude::*;
 
 mod automata;
+mod drunkard;
 mod empty;
 mod rooms;
 
@@ -119,19 +120,18 @@ impl MapBuilder {
         }
     }
 
-    fn spawn_monsters(
-        &self,
-        start: &Point, 
-        rng: &mut RandomNumberGenerator
-    ) -> Vec<Point> {
+    fn spawn_monsters(&self, start: &Point, rng: &mut RandomNumberGenerator) -> Vec<Point> {
         const NUM_MONSTERS: usize = 50;
-        let mut spawnable_tiles: Vec<Point> = self.map.tiles
+        let mut spawnable_tiles: Vec<Point> = self
+            .map
+            .tiles
             .iter()
             .enumerate()
-            .filter(|(idx, t)| 
-                **t == TileType::Floor &&
-                    DistanceAlg::Pythagoras.distance2d(*start, self.map.index_to_point2d(*idx)) > 10.0
-            )
+            .filter(|(idx, t)| {
+                **t == TileType::Floor
+                    && DistanceAlg::Pythagoras.distance2d(*start, self.map.index_to_point2d(*idx))
+                        > 10.0
+            })
             .map(|(idx, _)| self.map.index_to_point2d(idx))
             .collect();
 
