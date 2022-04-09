@@ -11,6 +11,7 @@ pub fn map_idx(x: i32, y: i32) -> usize {
 pub enum TileType {
     Wall,
     Floor,
+    Exit,
 }
 
 pub struct Map {
@@ -40,7 +41,9 @@ impl Map {
     /// An entity can enter a tile if it is within the map's bounds and the tile
     /// type is floor
     pub fn can_enter_tile(&self, point: Point) -> bool {
-        self.in_bounds(point) && self.tiles[map_idx(point.x, point.y)] == TileType::Floor
+        self.in_bounds(point)
+            && (self.tiles[map_idx(point.x, point.y)] == TileType::Floor
+                || self.tiles[map_idx(point.x, point.y)] == TileType::Exit)
     }
 
     /// Try to get the index of a particular tile on the map
