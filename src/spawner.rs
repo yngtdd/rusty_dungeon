@@ -91,7 +91,7 @@ pub fn spawn_healing_potion(ecs: &mut World, pos: Point) {
             glyph: to_cp437('!'),
         },
         Name("Healing Potion".to_string()),
-        ProvidesHealing { amount: 6 },
+        ProvidesHealing { amount: 3 },
     ));
 }
 
