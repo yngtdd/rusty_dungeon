@@ -8,6 +8,12 @@ Templates (
         ),
         Template(
             entity_type: Item,
+            name: "Weak Healing Potion", glyph: '!', levels: [0, 1, 2],
+            provides: Some([("Healing", 2)]),
+            frequency: 2
+        ),
+        Template(
+            entity_type: Item,
             name: "Dungeon Map", glyph: '{', levels: [0, 1, 2],
             provides: Some([("MagicMap", 0)]),
             frequency: 1 
