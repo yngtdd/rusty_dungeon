@@ -59,7 +59,9 @@ impl Templates {
             if let Some(entity) = rng.random_slice_entry(&available_entities) {
                 self.spawn_entity(pt, entity, &mut commands);
             }
-        })
+        });
+
+        commands.flush(ecs);
     }
 
     fn spawn_entity(
